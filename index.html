@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Finde all pairs!</title>
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div class="game-field">
+                <div class="ceil" id="id0"></div>
+                <div class="ceil" id="id1"></div>
+                <div class="ceil" id="id2"></div>
+                <div class="ceil" id="id3"></div>
+                <div class="ceil" id="id4"></div>
+                <div class="ceil" id="id5"></div>
+                <div class="ceil" id="id6"></div>
+                <div class="ceil" id="id7"></div>
+                <div class="ceil" id="id8"></div>
+                <div class="ceil" id="id9"></div>
+                <div class="ceil" id="id10"></div>
+                <div class="ceil" id="id11"></div>
+                <div class="ceil" id="id12"></div>
+                <div class="ceil" id="id13"></div>
+                <div class="ceil" id="id14"></div>
+                <div class="ceil" id="id15"></div>
+            </div>
+            <form class="timer-form" name="timerForm" action="index.html" method="POST">
+                <button type="submit" class="button start">Старт</button>
+                <input class="timer" name="timer" value="00:00.000">
+            </form>
+        </div>
+        <div class="popup">
+            <p>Вы выиграли!</p>
+            <p>Затраченное время: <span id="result"></span></p>
+            <button class="ok" type="button">Ok</button>
+        </div>
+    </body>
+    <script src="script.js"></script>
+    <script src="timer.js"></script>
+    <script src="colors.js"></script>
+    <script src="shuffle.js"></script>
+</html>
