@@ -40,7 +40,13 @@ start.addEventListener('click', () => {
   colors = shuffle(colors);
   dateObj = new Date();
   startTimer();
-  startGame();
+  // Обработчик кликов по клеткам
+  document.addEventListener('click', (element) => {
+    // Проверка того, что клик сделан по клетке с нужным классом
+    if (element.target.className === 'ceil') {
+      startGame(element);
+    }
+  });
 });
 
 // Установка обработчика событий на клик по кнопке 'Ок' (закрывает попап), обнуляет игру

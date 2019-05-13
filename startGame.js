@@ -1,11 +1,26 @@
-const startGame = () => {
-  let isDobleClick = false;
-  // Обработчик кликов по клеткам
-  document.addEventListener('click', (element) => {
-    // Проверка того, что клик сделан по клетке с нужным классом
-    if (element.target.className === 'ceil') {
+// Функция, откладывающая вызов функции func на ms миллисекунд
+// и отменяющая предыдущий вызов, если следующий произошел ранее, чем отработал этот
+const debounce = (func, ms) => {
+    let timer = null;
+  
+    return (...args) => {
+      const onComplete = () => {
+        func.apply(this, args);
+        timer = null;
+      }
+  
+      if (timer) {
+        clearTimeout(timer);
+      }
+  
+      timer = setTimeout(onComplete, ms);
+    };
+};
+
+// Функция, определяющая процесс игры
+const startGame = debounce((element) => {
       // Проверка того, что нет открытых непарных клеток
-      if (count === 0 && !isDobleClick) {
+      if (count === 0) {
         // Получение id клетки, по которой кликнули
         id1 = element.target.id;
         // Получение числовой части id
@@ -16,26 +31,21 @@ const startGame = () => {
         // Открыта непарная клетка
         count = 1;
       } else {
-          if (count === 1 && !isDobleClick) {
-            isDobleClick = true;
-            // Обработка клетки, если на поле есть открытая клетка без пары
-            id2 = element.target.id;
-            id2Number = Number(id2.substring(2));
-            color2 = colors[id2Number];
-            document.querySelector(`#${id2}`).classList.add(color2);
-            // Проверка того, что цвета текущей и последней открытой клеток совпадают
-            if (color1 !== color2) {
-              // Установка задержки закрытия непарных клеток
-              window.setTimeout("deleteColors(color1, color2, id1, id2);", 200);
-            } else {
-              // Увеличение счетчика пар
-              pairsCount += 1;
-            }
-            // Обнуление счетчика непарных клеток
-            count = 0;
+          // Обработка клетки, если на поле есть открытая клетка без пары
+          id2 = element.target.id;
+          id2Number = Number(id2.substring(2));
+          color2 = colors[id2Number];
+          document.querySelector(`#${id2}`).classList.add(color2);
+          // Проверка того, что цвета текущей и последней открытой клеток совпадают
+          if (color1 !== color2) {
+            // Установка задержки закрытия непарных клеток
+            window.setTimeout("deleteColors(color1, color2, id1, id2);", 100);
           } else {
-            isDobleClick = false;
+            // Увеличение счетчика пар
+            pairsCount += 1;
           }
+          // Обнуление счетчика непарных клеток
+          count = 0;
       }
 
       // Проверка количества открытых пар, если 8 = игрок выиграл 
@@ -45,6 +55,4 @@ const startGame = () => {
         clearTimeout(clocktimer);
         clearTimer();
       }
-    }
-  });
-};
+}, 100);
