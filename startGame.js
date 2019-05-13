@@ -52,7 +52,7 @@ const startGame = debounce((element) => {
       if (pairsCount === 8) {
         document.getElementById('result').innerHTML = document.timerForm.timer.value;
         popup.classList.add('show-popup');
-        clearTimeout(clocktimer);
+        // Обнуление таймера
         clearTimer();
       }
 }, 100);

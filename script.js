@@ -8,8 +8,6 @@ const ceils = document.querySelectorAll('.ceil');
 // Получение кнопки старта
 const start = document.querySelector('.start');
 
-
-
 // Счетчик открытых непарных клеток и открытых пар
 let count = 0;
 let pairsCount = 0;
@@ -24,6 +22,8 @@ let color2 = '';
 // Установка обработчика событий на клик по кнопке старт
 start.addEventListener('click', () => {
   event.preventDefault();
+  // Обнуление таймера
+  clearTimer();
   // Удаление цветов у клеток
   Array.from(ceils).forEach((el) => {
     el.classList.remove('red');
